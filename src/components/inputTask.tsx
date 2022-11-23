@@ -4,8 +4,13 @@ import { inputTodo } from '../states/inputTodo'
 import { Todos } from '../states/todos'
 import { todo } from '../types/todo';
 
+let i:number=0;
+
 const getKey=()=>{
-  Math.random().toString(32).substring(2);
+  i++;
+  return (
+    i
+  )
 };
 
 export const InputTask = () => {
