@@ -2,7 +2,7 @@ import { useCallback, useState } from "react"
 
 export const EditTask = (props:any) => {
 
-  const {onEdit,isAdmin,setIsAdmin,title}=props
+  const {isAdmin,setIsAdmin,title}=props
 
   const [input,setInput]=useState(title)
 
@@ -10,7 +10,11 @@ export const EditTask = (props:any) => {
     setInput(e.target.value);
   },[])
 
-  const onClick=()=>{
+  const onDone=()=>{
+    setIsAdmin(!isAdmin);
+  }
+
+  const onEdit=()=>{
     setIsAdmin(!isAdmin);
   }
   
@@ -19,7 +23,7 @@ export const EditTask = (props:any) => {
       {isAdmin ? (
         <div>
           <input onChange={onChange} value={input} />
-          <button onClick={onClick}>完了</button>
+          <button onClick={onDone}>完了</button>
         </div>
       ) : (
         <div>
