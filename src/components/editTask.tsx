@@ -23,17 +23,17 @@ export const EditTask = (props:any) => {
     setIsAdmin(true);
   },[])
 
-  const onEditDone=()=>{
+  const onEditDone=useCallback(()=>{
     setIsAdmin(false);
-  }
+  },[])
 
-  const onTaskDone=(index:number,id:number)=>{
+  const onTaskDone=useCallback((index:number,id:number)=>{
     const newTasks=[...tasks];
     newTasks.splice(index,1);
     setTasks(newTasks);
 
     setDoneTasks([...doneTasks,{id: id,title: title}]);
-  }
+  },[doneTasks,setDoneTasks,setTasks,tasks,title])
   
   return (
     <div> 
