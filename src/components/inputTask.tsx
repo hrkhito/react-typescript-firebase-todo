@@ -32,8 +32,8 @@ export const InputTask = () => {
 
   return (
     <div>
-      <input type="text" onChange={typingText} value={InputTodoText}/>
-      <button onClick={addText}>追加</button>
+      <input type="text" placeholder="add task" onChange={typingText} value={InputTodoText}/>
+      <button onClick={addText} disabled={InputTodoText===""}>追加</button>
     </div>
   )
 }
