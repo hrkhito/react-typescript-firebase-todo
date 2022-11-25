@@ -1,7 +1,7 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import './App.css';
-import { AddedTask } from "./components/addedTask"
+import { UndoneTask } from "./components/undoneTask"
 import { DoneTask } from './components/doneTask';
 import { InputTask } from './components/inputTask';
 
@@ -11,7 +11,7 @@ function App() {
     <RecoilRoot>
       <div className="App">
         <InputTask />
-        <AddedTask />
+        <UndoneTask />
         <DoneTask />
       </div>
     </RecoilRoot>

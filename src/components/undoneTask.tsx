@@ -4,7 +4,7 @@ import { todo } from '../types/todo';
 import { DeleteTask } from './deleteTask';
 import { EditTask } from './editTask';
 
-export const AddedTask = () => {
+export const UndoneTask = () => {
 
   const tasks=useRecoilValue<Array<todo>>(Todos);
   const setTasks=useSetRecoilState(Todos); 
