@@ -37,11 +37,10 @@ export const EditTask = (props:any) => {
   
   return (
     <div> 
-      <input onChange={onChange} value={input} />
+      <input onChange={onChange} value={input} placeholder="入力して" />
       { isAdmin ? (
-        <button onClick={onEditDone}>編集完了</button>
+        <button onClick={onEditDone} disabled={input===""}>編集完了</button>
       ) : (
-        // 別コンポーネント作成
         <button onClick={()=>{onTaskDone(index,id)}}>タスク完了</button>
       )
       }
