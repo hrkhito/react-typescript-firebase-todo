@@ -23,6 +23,7 @@ export const UndoneTask = () => {
               tasks={tasks}
               setTasks={setTasks}
               index={index}
+              id={task.id}
             />
           </div>
         )

@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { AllTodos } from '../states/allTodos';
 import { inputTodo } from '../states/inputTodo'
 import { Todos } from '../states/todos'
 import { todo } from '../types/todo';
@@ -18,7 +19,10 @@ export const InputTask = () => {
   const InputTodoText=useRecoilValue(inputTodo);
   const setInputTodoText=useSetRecoilState(inputTodo);
 
-  const tasks=useRecoilValue<any>(Todos);
+  const allTasks=useRecoilValue(AllTodos);
+  const setAllTasks=useSetRecoilState(AllTodos);
+
+  const tasks=useRecoilValue(Todos);
   const setTasks=useSetRecoilState<Array<todo>>(Todos);
 
   const typingText=useCallback((e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -26,9 +30,13 @@ export const InputTask = () => {
   },[setInputTodoText]);
 
   const addText=useCallback(()=>{
-    setTasks([...tasks,{id: getKey(),title: InputTodoText}]);
+    const id=getKey();
+
+    setAllTasks([...allTasks,{id: id,title: InputTodoText}]);
+
+    setTasks([...tasks,{id: id,title: InputTodoText}]);
     setInputTodoText("");
-  },[InputTodoText, setInputTodoText, setTasks,tasks])
+  },[InputTodoText, setInputTodoText, setTasks,tasks,allTasks,setAllTasks])
 
   return (
     <div>
