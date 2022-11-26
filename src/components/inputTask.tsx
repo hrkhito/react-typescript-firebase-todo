@@ -32,9 +32,9 @@ export const InputTask = () => {
   const addText=useCallback(()=>{
     const id=getKey();
 
-    setAllTasks([...allTasks,{id: id,title: InputTodoText}]);
+    setAllTasks([...allTasks,{id: id,title: InputTodoText}].sort((a,b)=>a.id-b.id));
 
-    setTasks([...tasks,{id: id,title: InputTodoText}]);
+    setTasks([...tasks,{id: id,title: InputTodoText}].sort((a,b)=>a.id-b.id));
     setInputTodoText("");
   },[InputTodoText, setInputTodoText, setTasks,tasks,allTasks,setAllTasks])
 

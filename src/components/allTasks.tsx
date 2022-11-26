@@ -34,9 +34,9 @@ export const AllTasks = memo((props:any) => {
         currentTask.id!==id
       )
     })
-    setTasks(newTasks);
+    setTasks(newTasks.sort((a,b)=>a.id-b.id));
 
-    setDoneTasks([...doneTasks,{id: id,title: title}]);
+    setDoneTasks([...doneTasks,{id: id,title: title}].sort((a,b)=>a.id-b.id));
 
     setIsAdmin(true);
   },[doneTasks,setDoneTasks,setTasks,tasks])
@@ -50,16 +50,16 @@ export const AllTasks = memo((props:any) => {
         currentDoneTask.id!==id
       )
     })
-    setDoneTasks(newDoneTasks);
+    setDoneTasks(newDoneTasks.sort((a,b)=>a.id-b.id));
 
-    setTasks([...tasks,{id:id,title:title}])
+    setTasks([...tasks,{id:id,title:title}].sort((a,b)=>a.id-b.id))
 
   },[setDoneTasks,tasks,setTasks])
 
   const onClickDelete=useCallback((index:number,id:number)=>{
     const newAllTasks=[...allTasks];
     newAllTasks.splice(index,1)
-    setAllTasks(newAllTasks);
+    setAllTasks(newAllTasks.sort((a,b)=>a.id-b.id));
 
     const currentTasks=[...tasks];
     const newTasks=currentTasks.filter((currentTask)=>{
@@ -67,7 +67,7 @@ export const AllTasks = memo((props:any) => {
         currentTask.id!==id
       )
     })
-    setTasks(newTasks);
+    setTasks(newTasks.sort((a,b)=>a.id-b.id));
 
     const currentDoneTasks=[...doneTasks];
     const newDoneTasks=currentDoneTasks.filter((currentDoneTask)=>{
@@ -75,7 +75,7 @@ export const AllTasks = memo((props:any) => {
         currentDoneTask.id!==id
       )
     })
-    setDoneTasks(newDoneTasks);
+    setDoneTasks(newDoneTasks.sort((a,b)=>a.id-b.id));
   },[allTasks,setAllTasks,setTasks,tasks,doneTasks,setDoneTasks])
   
   return (

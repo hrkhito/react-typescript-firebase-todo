@@ -17,11 +17,11 @@ export const DeleteTask = (props:any) => {
         currentAllTask.id!==id
       )
     })
-    setAllTasks(newAllTasks);
+    setAllTasks(newAllTasks.sort((a,b)=>a.id-b.id));
 
     const newTasks=[...tasks];
     newTasks.splice(index,1);
-    setTasks(newTasks);
+    setTasks(newTasks.sort((a,b)=>a.id-b.id));
   },[setTasks,tasks,allTasks,setAllTasks])
   
   return (

@@ -32,9 +32,9 @@ export const EditTask = (props:any) => {
   const onTaskDone=useCallback((index:number,id:number)=>{
     const newTasks=[...tasks];
     newTasks.splice(index,1);
-    setTasks(newTasks);
+    setTasks(newTasks.sort((a,b)=>a.id-b.id));
 
-    setDoneTasks([...doneTasks,{id: id,title: title}]);
+    setDoneTasks([...doneTasks,{id: id,title: title}].sort((a,b)=>a.id-b.id));
   },[doneTasks,setDoneTasks,setTasks,tasks,title])
   
   return (

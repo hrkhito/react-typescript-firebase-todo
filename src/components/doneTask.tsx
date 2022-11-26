@@ -21,10 +21,10 @@ export const DoneTask = (props:any) => {
   const onClickBack=useCallback((index:number,id:number,title:string)=>{
     const newDoneTasks=[...doneTasks];
     newDoneTasks.splice(index,1);
-    setDoneTasks(newDoneTasks);
+    setDoneTasks(newDoneTasks.sort((a,b)=>a.id-b.id));
 
     const newTasks=[...tasks,{id: id,title: title}];
-    setTasks(newTasks);
+    setTasks(newTasks.sort((a,b)=>a.id-b.id));
   },[doneTasks,setDoneTasks,setTasks,tasks])
 
   const onClickDelete=useCallback((index:number,id:number)=>{
@@ -35,11 +35,11 @@ export const DoneTask = (props:any) => {
         currentAllTask.id!==id
       )
     })
-    setAllTasks(newAllTasks);
+    setAllTasks(newAllTasks.sort((a,b)=>a.id-b.id));
 
     const newDoneTasks=[...doneTasks];
     newDoneTasks.splice(index,1);
-    setDoneTasks(newDoneTasks);
+    setDoneTasks(newDoneTasks.sort((a,b)=>a.id-b.id));
   },[doneTasks,setDoneTasks,allTasks,setAllTasks])
   
   return (
