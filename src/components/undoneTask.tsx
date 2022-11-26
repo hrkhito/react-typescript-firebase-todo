@@ -4,6 +4,8 @@ import { todo } from '../types/todo';
 import { DeleteTask } from './deleteTask';
 import { EditTask } from './editTask';
 
+// 未完了タスク一覧ページ
+
 export const UndoneTask = () => {
 
   const tasks=useRecoilValue<Array<todo>>(Todos);

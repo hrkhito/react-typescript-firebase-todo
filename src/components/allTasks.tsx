@@ -5,6 +5,8 @@ import { DoneTodos } from "../states/doneTodos";
 import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
 
+// タスク一覧ページ
+
 export const AllTasks = memo((props:any) => {
 
   const [isAdmin,setIsAdmin]=useState(false);

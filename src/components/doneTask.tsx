@@ -5,6 +5,8 @@ import { DoneTodos } from "../states/doneTodos";
 import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
 
+// 完了タスク一覧ページ
+
 export const DoneTask = (props:any) => {
 
   const allTasks=useRecoilValue<Array<todo>>(AllTodos);
