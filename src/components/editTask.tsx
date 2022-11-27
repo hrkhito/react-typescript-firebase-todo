@@ -1,65 +1,70 @@
-import { useCallback, useState } from "react"
+// 編集機能のコンポーネント
+
+import { useCallback, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DoneTodos } from "../states/doneTodos";
+import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
-
-// 編集機能のコンポーネント
 
 export const EditTask = (props:any) => {
   
-  const { title,index,id,tasks,setTasks }=props
+  const {index,title,id}=props
+
+  const [isAdmin,setIsAdmin]=useState(false);
+
+  const tasks=useRecoilValue<Array<todo>>(Todos);
+  const setTasks=useSetRecoilState<Array<todo>>(Todos);
 
   const doneTasks=useRecoilValue<Array<todo>>(DoneTodos);
   const setDoneTasks=useSetRecoilState<Array<todo>>(DoneTodos);
 
-  const [isAdmin,setIsAdmin]=useState(false);
+  const onChange=useCallback((e:React.ChangeEvent<HTMLInputElement>,id:number)=>{
+    setIsAdmin(true)
 
-  const [input,setInput]=useState(title)
+    const currentTasks=[...tasks];
+    const newTasks=currentTasks.filter((currentTask)=>{
+      return (
+        currentTask.id===id
+      )
+    })
+    const okTasks=currentTasks.filter((currentTask)=>{
+      return (
+        currentTask.id!==id
+      )
+    })
 
-  const onChange=useCallback((e:React.ChangeEvent<HTMLInputElement>)=>{
-    setInput(e.target.value);
-    setIsAdmin(true);
-  },[])
+    const neoNewTasks=newTasks.map((newTask)=>{
+      const newValue={
+        id: newTask.id,
+        title: e.target.value
+      }
+
+      return newValue
+    })
+    setTasks([...okTasks,...neoNewTasks].sort((a,b)=>a.id-b.id))
+  },[setTasks,tasks])
 
   const onEditDone=useCallback((id:number)=>{
     setIsAdmin(false);
-    const newTasks:todo[]=tasks.map((newTask:todo)=>{
-      
-      if(newTask.id===id){
-        const newValue:todo={
-          title:input,
-          id: id
-        }
+  },[setIsAdmin])
 
-        return (
-          newValue
-        )
-      }
-
-      return (
-        tasks
-      )
-    })
-    setTasks(newTasks)
-  },[input,tasks,setTasks])
-
-  const onTaskDone=useCallback((index:number,id:number)=>{
+  const onTaskDone=useCallback((index:number,id:number,title:string)=>{
     const newTasks=[...tasks];
     newTasks.splice(index,1);
     setTasks(newTasks.sort((a,b)=>a.id-b.id));
 
     setDoneTasks([...doneTasks,{id: id,title: title}].sort((a,b)=>a.id-b.id));
-  },[doneTasks,setDoneTasks,setTasks,tasks,title])
+  },[doneTasks,setDoneTasks,setTasks,tasks])
   
   return (
-    <div> 
-      <input onChange={onChange} value={input} placeholder="入力して" />
-      { isAdmin ? (
-        <button onClick={()=>{onEditDone(id)}} disabled={input===""}>編集完了</button>
-      ) : (
-        <button onClick={()=>{onTaskDone(index,id)}}>タスク完了</button>
-      )
-      }
+    <div>
+      <input onChange={(e)=>{onChange(e,id)}} value={title} placeholder="入力して" />
+        { isAdmin ? (
+        <button onClick={()=>{onEditDone(id)}} disabled={title===""}>編集完了</button>
+        ) : (
+        <button onClick={()=>{onTaskDone(index,id,title)}}>タスク完了</button>
+        )
+        }
     </div>
   )
 }
