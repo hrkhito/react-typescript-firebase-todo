@@ -2,6 +2,8 @@ import { useCallback } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AllTodos } from "../states/allTodos";
 
+// 削除機能のコンポーネント
+
 export const DeleteTask = (props:any) => {
 
   const {tasks,setTasks,index,id}=props;

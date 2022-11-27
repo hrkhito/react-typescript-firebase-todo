@@ -4,15 +4,15 @@ import { DoneTodos } from "../states/doneTodos";
 import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
 
+// 編集機能のコンポーネント
+
 export const EditTask = (props:any) => {
   
   const { title,index,id }=props
 
-  // 未完了エリア
   const tasks=useRecoilValue<Array<todo>>(Todos);
   const setTasks=useSetRecoilState<Array<todo>>(Todos);
 
-  // 完了エリア
   const doneTasks=useRecoilValue<Array<todo>>(DoneTodos);
   const setDoneTasks=useSetRecoilState<Array<todo>>(DoneTodos);
 

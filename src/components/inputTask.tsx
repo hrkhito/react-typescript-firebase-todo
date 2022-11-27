@@ -5,6 +5,8 @@ import { inputTodo } from '../states/inputTodo'
 import { Todos } from '../states/todos'
 import { todo } from '../types/todo';
 
+// todo追加用コンポーネント
+
 let i:number=0;
 
 const getKey=()=>{
@@ -15,7 +17,7 @@ const getKey=()=>{
 };
 
 export const InputTask = () => {
-
+  
   const InputTodoText=useRecoilValue(inputTodo);
   const setInputTodoText=useSetRecoilState(inputTodo);
 

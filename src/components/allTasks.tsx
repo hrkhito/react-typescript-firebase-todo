@@ -15,15 +15,12 @@ export const AllTasks = memo((props:any) => {
 
   },[])
   
-  // タスク一覧
   const allTasks=useRecoilValue(AllTodos);
   const setAllTasks=useSetRecoilState(AllTodos);
 
-  // 未完了エリア
   const tasks=useRecoilValue<Array<todo>>(Todos);
   const setTasks=useSetRecoilState<Array<todo>>(Todos);
 
-  // 完了エリア
   const doneTasks=useRecoilValue<Array<todo>>(DoneTodos);
   const setDoneTasks=useSetRecoilState<Array<todo>>(DoneTodos);
 

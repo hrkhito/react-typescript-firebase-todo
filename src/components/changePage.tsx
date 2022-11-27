@@ -3,6 +3,7 @@ import { AllTasks } from "./allTasks";
 import { DoneTask } from "./doneTask";
 import { UndoneTask } from "./undoneTask";
 
+// タスク一覧、未完了一覧、完了一覧に切り替えるためのコンポーネント
 
 export const ChangePage = (props:any) => {
 
