@@ -1,8 +1,8 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import './App.css';
-import { AddedTask } from "./components/addedTask"
 import { InputTask } from './components/inputTask';
+import { ChangePage } from './components/changePage';
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <RecoilRoot>
       <div className="App">
         <InputTask />
-        <AddedTask />
+        <ChangePage />
       </div>
     </RecoilRoot>
   );
