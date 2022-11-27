@@ -2,6 +2,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { Todos } from '../states/todos'
 import { todo } from '../types/todo';
 import { DeleteTask } from './deleteTask';
+// import { DeleteTask } from './deleteTask';
 import { EditTask } from './editTask';
 
 // 未完了タスク一覧ページ
@@ -9,14 +10,16 @@ import { EditTask } from './editTask';
 export const UndoneTask = () => {
 
   const tasks=useRecoilValue<Array<todo>>(Todos);
-  const setTasks=useSetRecoilState(Todos); 
+  const setTasks=useSetRecoilState<Array<todo>>(Todos);
   
   return (
     <ul>
       {tasks.map((task:todo,index:number)=>{
         return (
-          <div key={task.id}>
-            <EditTask  
+          <li key={task.id}>
+            <EditTask
+              tasks={tasks}
+              setTasks={setTasks}
               title={task.title}
               index={index}
               id={task.id}
@@ -27,7 +30,7 @@ export const UndoneTask = () => {
               index={index}
               id={task.id}
             />
-          </div>
+          </li>
         )
       })}
     </ul>

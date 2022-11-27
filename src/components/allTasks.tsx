@@ -76,8 +76,7 @@ export const AllTasks = memo((props:any) => {
   },[allTasks,setAllTasks,setTasks,tasks,doneTasks,setDoneTasks])
   
   return (
-    <div>
-      <ul>
+    <ul>
       {allTasks.map((allTask,index)=>{
         return (
           <li key={allTask.id}>
@@ -91,7 +90,6 @@ export const AllTasks = memo((props:any) => {
           </li>
         )
       })}
-      </ul>
-    </div>
+    </ul>
   )
 })

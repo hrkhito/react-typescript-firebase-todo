@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { AllTodos } from '../states/allTodos';
+import { DoneTodos } from '../states/doneTodos';
 import { inputTodo } from '../states/inputTodo'
 import { Todos } from '../states/todos'
 import { todo } from '../types/todo';
@@ -17,15 +18,17 @@ const getKey=()=>{
 };
 
 export const InputTask = () => {
-  
+
   const InputTodoText=useRecoilValue(inputTodo);
   const setInputTodoText=useSetRecoilState(inputTodo);
 
-  const allTasks=useRecoilValue(AllTodos);
+  // const allTasks=useRecoilValue(AllTodos);
   const setAllTasks=useSetRecoilState(AllTodos);
 
   const tasks=useRecoilValue(Todos);
   const setTasks=useSetRecoilState<Array<todo>>(Todos);
+
+  const doneTasks=useRecoilValue<Array<todo>>(DoneTodos);
 
   const typingText=useCallback((e:React.ChangeEvent<HTMLInputElement>)=>{
     setInputTodoText(e.target.value);
@@ -34,11 +37,11 @@ export const InputTask = () => {
   const addText=useCallback(()=>{
     const id=getKey();
 
-    setAllTasks([...allTasks,{id: id,title: InputTodoText}].sort((a,b)=>a.id-b.id));
+    setAllTasks([...tasks,...doneTasks,{id: id,title: InputTodoText}].sort((a,b)=>a.id-b.id));
 
     setTasks([...tasks,{id: id,title: InputTodoText}].sort((a,b)=>a.id-b.id));
     setInputTodoText("");
-  },[InputTodoText, setInputTodoText, setTasks,tasks,allTasks,setAllTasks])
+  },[InputTodoText, setInputTodoText, setTasks,tasks,setAllTasks,doneTasks])
 
   return (
     <div>

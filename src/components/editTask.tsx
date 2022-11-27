@@ -1,17 +1,13 @@
 import { useCallback, useState } from "react"
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DoneTodos } from "../states/doneTodos";
-import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
 
 // 編集機能のコンポーネント
 
 export const EditTask = (props:any) => {
   
-  const { title,index,id }=props
-
-  const tasks=useRecoilValue<Array<todo>>(Todos);
-  const setTasks=useSetRecoilState<Array<todo>>(Todos);
+  const { title,index,id,tasks,setTasks }=props
 
   const doneTasks=useRecoilValue<Array<todo>>(DoneTodos);
   const setDoneTasks=useSetRecoilState<Array<todo>>(DoneTodos);
@@ -25,9 +21,27 @@ export const EditTask = (props:any) => {
     setIsAdmin(true);
   },[])
 
-  const onEditDone=useCallback(()=>{
+  const onEditDone=useCallback((id:number)=>{
     setIsAdmin(false);
-  },[])
+    const newTasks:todo[]=tasks.map((newTask:todo)=>{
+      
+      if(newTask.id===id){
+        const newValue:todo={
+          title:input,
+          id: id
+        }
+
+        return (
+          newValue
+        )
+      }
+
+      return (
+        tasks
+      )
+    })
+    setTasks(newTasks)
+  },[input,tasks,setTasks])
 
   const onTaskDone=useCallback((index:number,id:number)=>{
     const newTasks=[...tasks];
@@ -41,7 +55,7 @@ export const EditTask = (props:any) => {
     <div> 
       <input onChange={onChange} value={input} placeholder="入力して" />
       { isAdmin ? (
-        <button onClick={onEditDone} disabled={input===""}>編集完了</button>
+        <button onClick={()=>{onEditDone(id)}} disabled={input===""}>編集完了</button>
       ) : (
         <button onClick={()=>{onTaskDone(index,id)}}>タスク完了</button>
       )
