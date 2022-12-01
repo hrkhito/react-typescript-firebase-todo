@@ -62,7 +62,6 @@ export const EditAllTasks = memo((props:any) => {
 
     // 完了のタスク一覧
     const newDoneTasks=[...doneTasks,{id: id,title: title,isAdmin:isAdmin}].sort((a,b)=>a.id-b.id);
-    console.log(newDoneTasks)
     setDoneTasks(newDoneTasks);
   },[doneTasks,setDoneTasks,setTasks,tasks,allTasks,setAllTasks])
 
@@ -97,7 +96,6 @@ export const EditAllTasks = memo((props:any) => {
 
     // 未完了のタスク一覧
     const newTasks=[...tasks,{id: id,title: title,isAdmin:isAdmin}].sort((a,b)=>a.id-b.id);
-    console.log(newTasks)
     setTasks(newTasks);
 
     // 完了のタスク一覧
@@ -219,7 +217,7 @@ export const EditAllTasks = memo((props:any) => {
   
   return (
     <div>
-      <input value={title} onChange={(e)=>{onChange(e,id)}} placeholder="入力して" />
+      <input disabled={isAdmin} value={title} onChange={(e)=>{onChange(e,id)}} placeholder="入力して" />
         { editIsAdmin ? (
           <button onClick={()=>{onEditDone(id)}} disabled={title===""}>編集完了</button>
           ) : (
