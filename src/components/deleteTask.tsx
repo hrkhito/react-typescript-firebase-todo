@@ -11,8 +11,10 @@ export const DeleteTask = (props:any) => {
   const allTasks=useRecoilValue(AllTodos);
   const setAllTasks=useSetRecoilState(AllTodos);
   
+  // 削除ボタン
   const onDelete=useCallback((index:number,id:number)=>{
 
+    // 全タスク一覧
     const currentAllTasks=[...allTasks];
     const newAllTasks=currentAllTasks.filter((currentAllTask)=>{
       return (
@@ -21,6 +23,7 @@ export const DeleteTask = (props:any) => {
     })
     setAllTasks(newAllTasks.sort((a,b)=>a.id-b.id));
 
+    // 未完了タスク一覧
     const newTasks=[...tasks];
     newTasks.splice(index,1);
     setTasks(newTasks.sort((a,b)=>a.id-b.id));

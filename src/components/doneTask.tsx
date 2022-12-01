@@ -18,17 +18,50 @@ export const DoneTask = (props:any) => {
   const tasks=useRecoilValue<Array<todo>>(Todos);
   const setTasks=useSetRecoilState(Todos);
 
-  const onClickBack=useCallback((index:number,id:number,title:string)=>{
+  // 戻すボタン
+  const onClickBack=useCallback((index:number,id:number,title:string,isAdmin:boolean)=>{
+    isAdmin=false;
+
+    // 全タスク一覧
+    const currentAllTasks=[...allTasks]
+    const newAllTasks=currentAllTasks.filter((currentAllTask)=>{
+      return (
+        currentAllTask.id!==id
+      )
+    })
+
+    const okAllTasks=currentAllTasks.filter((currentAllTask)=>{
+      return (
+        currentAllTask.id===id
+      )
+    })
+
+    const neoNewAllTasks=okAllTasks.map((newTask)=>{
+      const newValue={
+        id: id,
+        title: title,
+        isAdmin: isAdmin
+      }
+
+      return newValue
+    })
+    setAllTasks([...neoNewAllTasks,...newAllTasks].sort((a,b)=>a.id-b.id))
+    
+    // 未完了タスク一覧
+    const newTasks=[...tasks,{id: id,title: title,isAdmin:isAdmin}].sort((a,b)=>a.id-b.id);
+    setTasks(newTasks);
+
+    // 完了タスク一覧
     const newDoneTasks=[...doneTasks];
     newDoneTasks.splice(index,1);
     setDoneTasks(newDoneTasks.sort((a,b)=>a.id-b.id));
 
-    const newTasks=[...tasks,{id: id,title: title}];
-    setTasks(newTasks.sort((a,b)=>a.id-b.id));
-  },[doneTasks,setDoneTasks,setTasks,tasks])
+  },[doneTasks,setDoneTasks,setTasks,tasks,allTasks,setAllTasks])
 
+  // 削除ボタン
   const onClickDelete=useCallback((index:number,id:number)=>{
 
+    // 全タスク一覧
     const currentAllTasks=[...allTasks];
     const newAllTasks=currentAllTasks.filter((currentAllTask)=>{
       return (
@@ -37,6 +70,7 @@ export const DoneTask = (props:any) => {
     })
     setAllTasks(newAllTasks.sort((a,b)=>a.id-b.id));
 
+    // 完了タスク一覧
     const newDoneTasks=[...doneTasks];
     newDoneTasks.splice(index,1);
     setDoneTasks(newDoneTasks.sort((a,b)=>a.id-b.id));
@@ -48,7 +82,7 @@ export const DoneTask = (props:any) => {
         return (
           <li key={task.id}>
             <p>{task.title}</p>
-            <button onClick={()=>{onClickBack(index,task.id,task.title)}}>戻す</button>
+            <button onClick={()=>{onClickBack(index,task.id,task.title,task.isAdmin)}}>戻す</button>
             <button onClick={()=>{onClickDelete(index,task.id)}}>削除</button>
           </li>
         )
