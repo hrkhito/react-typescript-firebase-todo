@@ -4,7 +4,6 @@ import './App.css';
 import { InputTask } from './components/inputTask';
 import { ChangePage } from './components/changePage';
 
-
 function App() {
   return (
     <RecoilRoot>
