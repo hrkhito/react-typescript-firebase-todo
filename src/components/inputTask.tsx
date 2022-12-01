@@ -37,9 +37,9 @@ export const InputTask = () => {
   const addText=useCallback(()=>{
     const id=getKey();
 
-    setAllTasks([...tasks,...doneTasks,{id: id,title: InputTodoText}].sort((a,b)=>a.id-b.id));
+    setAllTasks([...tasks,...doneTasks,{id: id,title: InputTodoText,isAdmin: false}].sort((a,b)=>a.id-b.id));
 
-    setTasks([...tasks,{id: id,title: InputTodoText}].sort((a,b)=>a.id-b.id));
+    setTasks([...tasks,{id: id,title: InputTodoText,isAdmin: false}].sort((a,b)=>a.id-b.id));
     setInputTodoText("");
   },[InputTodoText, setInputTodoText, setTasks,tasks,setAllTasks,doneTasks])
 
