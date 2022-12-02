@@ -1,15 +1,19 @@
 import { useCallback } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AllTodos } from "../states/allTodos";
+import { Todos } from "../states/todos";
 
 // 削除機能のコンポーネント
 
 export const DeleteTask = (props:any) => {
 
-  const {tasks,setTasks,index,id}=props;
+  const {index,id}=props;
 
   const allTasks=useRecoilValue(AllTodos);
   const setAllTasks=useSetRecoilState(AllTodos);
+
+  const tasks=useRecoilValue(Todos);
+  const setTasks=useSetRecoilState(Todos);
   
   // 削除ボタン
   const onDelete=useCallback((index:number,id:number)=>{
@@ -30,8 +34,6 @@ export const DeleteTask = (props:any) => {
   },[setTasks,tasks,allTasks,setAllTasks])
   
   return (
-    <div>
-      <button onClick={()=>onDelete(index,id)}>削除</button>
-    </div>
+    <button onClick={()=>onDelete(index,id)}>削除</button>
   )
 }

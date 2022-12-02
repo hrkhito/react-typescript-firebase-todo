@@ -1,6 +1,7 @@
 import { useRecoilValue } from 'recoil'
 import { Todos } from '../states/todos'
 import { todo } from '../types/todo';
+import { DeleteTask } from './deleteTask';
 import { EditUndoneTask } from './editUndoneTask';
 
 // 未完了タスク一覧ページ
@@ -19,6 +20,10 @@ export const UndoneTask = (props:any) => {
               id={task.id}
               title={task.title}
               isAdmin={task.isAdmin}
+            />
+            <DeleteTask
+              index={index}
+              id={task.id}
             />
           </li>
         )
