@@ -4,6 +4,8 @@ import { AllTodos } from "../states/allTodos";
 import { DoneTodos } from "../states/doneTodos";
 import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
+import { Input,Button,Flex,Box } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 // 完了タスク一覧ページ
 
@@ -77,16 +79,16 @@ export const DoneTask = (props:any) => {
   },[doneTasks,setDoneTasks,allTasks,setAllTasks])
   
   return (
-    <ul>
+    <Box>
       {doneTasks.map((task:todo,index:number)=>{
         return (
-          <li key={task.id}>
-            <p>{task.title}</p>
-            <button onClick={()=>{onClickBack(index,task.id,task.title,task.isAdmin)}}>戻す</button>
-            <button onClick={()=>{onClickDelete(index,task.id)}}>削除</button>
-          </li>
+          <Flex mb={4} justify='center' align='center' width="100%" key={task.id}>
+            <Input mr={2} value={task.title} disabled />
+            <Button mr={2} onClick={()=>{onClickBack(index,task.id,task.title,task.isAdmin)}}>戻す</Button>
+            <DeleteIcon mr={2} onClick={()=>{onClickDelete(index,task.id)}}>削除</DeleteIcon>
+          </Flex>
         )
       })}
-    </ul>
+    </Box>
   )
 }

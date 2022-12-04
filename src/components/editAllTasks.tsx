@@ -6,6 +6,8 @@ import { AllTodos } from "../states/allTodos";
 import { DoneTodos } from "../states/doneTodos";
 import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
+import { Input,Button,Flex } from '@chakra-ui/react';
+import { DeleteIcon,CheckIcon } from '@chakra-ui/icons';
 
 export const EditAllTasks = memo((props:any) => {
 
@@ -216,19 +218,19 @@ export const EditAllTasks = memo((props:any) => {
   },[setEditIsAdmin])
   
   return (
-    <div>
-      <input disabled={isAdmin} value={title} onChange={(e)=>{onChange(e,id)}} placeholder="入力して" />
+    <Flex justify='center' align='center' width="100%" mb={4}>
+      <Input mr={2} disabled={isAdmin} value={title} onChange={(e)=>{onChange(e,id)}} placeholder="入力して" />
         { editIsAdmin ? (
-          <button onClick={()=>{onEditDone(id)}} disabled={title===""}>編集完了</button>
+          <Button mr={2} onClick={()=>{onEditDone(id)}} disabled={title===""}>編集完了</Button>
           ) : (
             isAdmin ? (
-              <button onClick={()=>{onClickBack(id,title,isAdmin)}}>戻す</button>
+              <Button mr={2} onClick={()=>{onClickBack(id,title,isAdmin)}}>戻す</Button>
             ) : (
-              <button onClick={()=>{onClickDone(index,id,title,isAdmin)}}>完了</button>
+              <CheckIcon mr={2} onClick={()=>{onClickDone(index,id,title,isAdmin)}}>完了</CheckIcon>
             )
           )
         }
-        <button onClick={()=>{onClickDelete(index,id)}}>削除</button>
-    </div>
+        <DeleteIcon onClick={()=>{onClickDelete(index,id)}}>削除</DeleteIcon>
+    </Flex>
   )
 })
