@@ -51,7 +51,7 @@ export const InputTask = () => {
       <Box width="100%" mb={4}>
         <Flex justify='center'>
           <Input mr={4} width={240} type="text" placeholder="add task" onChange={typingText} value={InputTodoText}/>
-          <Button bg="teal.400" color="white" _hover={{opacity: 0.8}}  onClick={addText} disabled={InputTodoText===""}>
+          <Button bg="purple.400" color="white" _hover={{opacity: 0.8}}  onClick={addText} disabled={InputTodoText===""}>
             追加
           </Button>
         </Flex>
