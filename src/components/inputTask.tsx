@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import React, { useCallback } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AllTodos } from '../states/allTodos';
 import { DoneTodos, DoneTodosLength } from '../states/doneTodos';
-import { inputTodo } from '../states/inputTodo'
-import { Todos, TodosLength } from '../states/todos'
+import { inputTodo } from '../states/inputTodo';
+import { Todos, TodosLength } from '../states/todos';
 import { todo } from '../types/todo';
+import { Box,Input,Button,Flex,Text } from '@chakra-ui/react';
 
 // todo追加用コンポーネント
 
@@ -46,11 +47,21 @@ export const InputTask = () => {
   },[InputTodoText, setInputTodoText, setTasks,tasks,setAllTasks,doneTasks])
 
   return (
-    <div>
-      <input type="text" placeholder="add task" onChange={typingText} value={InputTodoText}/>
-      <button onClick={addText} disabled={InputTodoText===""}>追加</button>
-      <p>undone: {undoneLength}</p>
-      <p>done: {doneLength}</p>
-    </div>
+    <Box mt={8} width="100%">
+      <Box width="100%" mb={4}>
+        <Flex justify='center'>
+          <Input mr={4} width={240} type="text" placeholder="add task" onChange={typingText} value={InputTodoText}/>
+          <Button bg="teal.400" color="white" _hover={{opacity: 0.8}}  onClick={addText} disabled={InputTodoText===""}>
+            追加
+          </Button>
+        </Flex>
+      </Box>
+      <Box width="100%" mb={4}>
+        <Flex justify='center'>
+          <Text fontWeight="bold" mr={16}>Undone: {undoneLength}</Text>
+          <Text fontWeight="bold">Done: {doneLength}</Text>
+        </Flex>
+      </Box>
+    </Box>
   )
 }

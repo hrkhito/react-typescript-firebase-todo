@@ -6,6 +6,8 @@ import { AllTodos } from "../states/allTodos";
 import { DoneTodos } from "../states/doneTodos";
 import { Todos } from "../states/todos";
 import { todo } from "../types/todo";
+import { Input,Button,Flex } from '@chakra-ui/react';
+import { CheckIcon,DeleteIcon } from '@chakra-ui/icons';
 
 export const EditUndoneTask = (props:any) => {
   
@@ -141,16 +143,35 @@ export const EditUndoneTask = (props:any) => {
     const newDoneTasks=[...doneTasks,{id: id,title: title,isAdmin: isAdmin}].sort((a,b)=>a.id-b.id)
     setDoneTasks(newDoneTasks);
   },[allTasks,setAllTasks,doneTasks,setDoneTasks,setTasks,tasks])
+
+  // 削除ボタン
+  const onDelete=useCallback((index:number,id:number)=>{
+
+    // 全タスク一覧
+    const currentAllTasks=[...allTasks];
+    const newAllTasks=currentAllTasks.filter((currentAllTask)=>{
+      return (
+        currentAllTask.id!==id
+      )
+    })
+    setAllTasks(newAllTasks.sort((a,b)=>a.id-b.id));
+
+    // 未完了タスク一覧
+    const newTasks=[...tasks];
+    newTasks.splice(index,1);
+    setTasks(newTasks.sort((a,b)=>a.id-b.id));
+  },[setTasks,tasks,allTasks,setAllTasks])
   
   return (
-    <div>
-      <input onChange={(e)=>{onChange(e,id)}} value={title} placeholder="入力して" />
+    <Flex justify='center' align='center' width="100%" mb={4}>
+      <Input mr={2} onChange={(e)=>{onChange(e,id)}} value={title} placeholder="入力して" />
         { Admin ? (
-        <button onClick={()=>{onEditDone(id)}} disabled={title===""}>編集完了</button>
+        <Button mr={2} onClick={()=>{onEditDone(id)}} disabled={title===""}>編集完了</Button>
         ) : (
-        <button onClick={()=>{onTaskDone(index,id,title,isAdmin)}}>タスク完了</button>
+        <CheckIcon mr={2} onClick={()=>{onTaskDone(index,id,title,isAdmin)}}>タスク完了</CheckIcon>
         )
         }
-    </div>
+      <DeleteIcon verticalAlign='bottom' onClick={()=>onDelete(index,id)}>削除</DeleteIcon>
+    </Flex>
   )
 }

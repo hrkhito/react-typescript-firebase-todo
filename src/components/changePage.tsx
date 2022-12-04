@@ -5,6 +5,7 @@ import { todo } from "../types/todo";
 import { DoneTask } from "./doneTask";
 import { EditAllTasks } from "./editAllTasks";
 import { UndoneTask } from "./undoneTask";
+import { Box,Button,Flex } from '@chakra-ui/react'
 
 // タスク一覧、未完了一覧、完了一覧に切り替えるためのコンポーネント
 
@@ -35,30 +36,34 @@ export const ChangePage = (props:any) => {
   },[])
   
   return (
-    <div>
-      <button onClick={onClickChangeAllTasks}>タスク一覧</button>
-      <button onClick={onClickChangeUndone}>未完了のタスク一覧</button>
-      <button onClick={onClickChangeDone}>完了済のタスク一覧</button>
-      { displayAllTasks ? (
-        <ul>
-        {allTasks.map((allTask:todo,index:number)=>{
-          return (
-            <li key={allTask.id}>
-              <EditAllTasks
-                index={index}
-                id={allTask.id}
-                title={allTask.title}
-                isAdmin={allTask.isAdmin}
-              />
-            </li>
+    <Box width="100%">
+      <Flex justify='center' width="100%" mb={4}>
+        <Button mr={2} bg="teal.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeAllTasks}>タスク一覧</Button>
+        <Button mr={2} bg="teal.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeUndone}>未完了のタスク一覧</Button>
+        <Button bg="teal.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeDone}>完了済のタスク一覧</Button>
+      </Flex>
+      <Flex width="100%" justify='center'>
+        { displayAllTasks ? (
+          <ul>
+          {allTasks.map((allTask:todo,index:number)=>{
+            return (
+              <li key={allTask.id}>
+                <EditAllTasks
+                  index={index}
+                  id={allTask.id}
+                  title={allTask.title}
+                  isAdmin={allTask.isAdmin}
+                />
+              </li>
+            )
+          })}
+        </ul>
+        ) : (
+          displayUndone ? <UndoneTask /> : (
+            displayDone && <DoneTask />
           )
-        })}
-      </ul>
-      ) : (
-        displayUndone ? <UndoneTask /> : (
-          displayDone && <DoneTask /> 
-        )
-      )}
-    </div>
+        )}
+      </Flex>
+    </Box>
   )
 }
