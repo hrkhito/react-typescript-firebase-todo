@@ -38,9 +38,9 @@ export const ChangePage = (props:any) => {
   return (
     <Box width="100%">
       <Flex justify='center' width="100%" mb={4}>
-        <Button mr={2} bg="teal.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeAllTasks}>タスク一覧</Button>
-        <Button mr={2} bg="teal.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeUndone}>未完了のタスク一覧</Button>
-        <Button bg="teal.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeDone}>完了済のタスク一覧</Button>
+        <Button mr={2} bg="purple.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeAllTasks}>タスク一覧</Button>
+        <Button mr={2} bg="purple.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeUndone}>未完了のタスク一覧</Button>
+        <Button bg="purple.400" color="white" _hover={{opacity: 0.8}} onClick={onClickChangeDone}>完了済のタスク一覧</Button>
       </Flex>
       <Flex width="100%" justify='center'>
         { displayAllTasks ? (

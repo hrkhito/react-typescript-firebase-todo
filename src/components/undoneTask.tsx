@@ -1,7 +1,6 @@
 import { useRecoilValue } from 'recoil'
 import { Todos } from '../states/todos'
 import { todo } from '../types/todo';
-// import { DeleteTask } from './deleteTask';
 import { EditUndoneTask } from './editUndoneTask';
 import { Flex,Box } from '@chakra-ui/react';
 
@@ -22,10 +21,6 @@ export const UndoneTask = (props:any) => {
               title={task.title}
               isAdmin={task.isAdmin}
             />
-            {/* <DeleteTask
-              index={index}
-              id={task.id}
-            /> */}
           </Flex>
         )
       })}
