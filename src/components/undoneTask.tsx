@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil'
-import { Todos } from '../states/todos'
+import { Todos } from '../store/todos'
 import { todo } from '../types/todo';
 import { EditUndoneTask } from './editUndoneTask';
 import { Flex,Box } from '@chakra-ui/react';

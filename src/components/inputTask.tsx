@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { AllTodos } from '../states/allTodos';
-import { DoneTodos, DoneTodosLength } from '../states/doneTodos';
-import { inputTodo } from '../states/inputTodo';
-import { Todos, TodosLength } from '../states/todos';
+import { AllTodos } from '../store/allTodos';
+import { DoneTodos, DoneTodosLength } from '../store/doneTodos';
+import { inputTodo } from '../store/inputTodo';
+import { Todos, TodosLength } from '../store/todos';
 import { todo } from '../types/todo';
 import { Box,Input,Button,Flex,Text } from '@chakra-ui/react';
 
