@@ -2,9 +2,9 @@
 
 import { memo, useCallback, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { AllTodos } from "../states/allTodos";
-import { DoneTodos } from "../states/doneTodos";
-import { Todos } from "../states/todos";
+import { AllTodos } from "../store/allTodos";
+import { DoneTodos } from "../store/doneTodos";
+import { Todos } from "../store/todos";
 import { todo } from "../types/todo";
 import { Input,Button,Flex } from '@chakra-ui/react';
 import { DeleteIcon,CheckIcon } from '@chakra-ui/icons';
